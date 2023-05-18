@@ -118,7 +118,7 @@ const BotCard = (props: any) => {
   const pictureUrl = `data:image/svg+xml,${encodeURIComponent(picture)}`;
   return (
     <Card
-      sx={{ maxWidth: 345 }}
+      sx={{ width: "280px" }}
       style={{
         backgroundColor: "#D4ADFC",
         border: "10px solid #5C469C",

@@ -7,7 +7,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 const BotCardCarousel = (props: any) => {
   const { data } = props;
   return (
-    <div className="d-flex w-50 justify-content-between align-items-center">
+    <div className="d-flex justify-content-between align-items-center">
       <IconButton
         sx={{
           color: "#D4ADFC",

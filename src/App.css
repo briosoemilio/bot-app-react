@@ -5,8 +5,9 @@
 
 .App {
   background-color: #0c134f;
-  width: 100vw;
+  max-width: 100%;
   height: 100vh;
+  overflow-x: hidden;
 }
 
 .custom-navbar {
