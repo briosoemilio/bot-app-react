@@ -9,8 +9,6 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -22,8 +20,6 @@ import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment"; /
 import ShieldIcon from "@mui/icons-material/Shield"; // defense
 import PsychologyIcon from "@mui/icons-material/Psychology"; // intelligence
 import BatteryChargingFullIcon from "@mui/icons-material/BatteryChargingFull"; // energy
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { mockBot } from "../mock/mockData";
 
 interface ExpandMoreProps extends IconButtonProps {
