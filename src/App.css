@@ -12,3 +12,12 @@
 .custom-navbar {
   background-color: #1d267d;
 }
+
+.card-text {
+  color: #1d267d;
+  font-weight: bold;
+}
+
+.card-id {
+  font-size: 24px;
+}
