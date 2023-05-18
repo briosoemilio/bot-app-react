@@ -4,13 +4,12 @@ import React, { useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 
 // Mui Components
-import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 
 // Icons
@@ -20,22 +19,6 @@ import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment"; /
 import ShieldIcon from "@mui/icons-material/Shield"; // defense
 import PsychologyIcon from "@mui/icons-material/Psychology"; // intelligence
 import BatteryChargingFullIcon from "@mui/icons-material/BatteryChargingFull"; // energy
-import { mockBot } from "../mock/mockData";
-
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
-
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
 
 const BotStatContainer = (props: any) => {
   const { statName, statValue, IconComponent } = props;
@@ -50,14 +33,14 @@ const BotStatContainer = (props: any) => {
   );
 };
 
-const BotCard = () => {
+const BotCard = (props: any) => {
   const [expanded, setExpanded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const data = mockBot;
+  const { data } = props;
   const {
     id,
     name,
