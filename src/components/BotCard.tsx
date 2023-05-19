@@ -55,8 +55,6 @@ const BotCard = (props: any) => {
   const isRare = data?.isRare;
   const isFavorite = data?.isFavorite;
 
-  const [isFavoriteState, setIsFavoriteState] = useState(isFavorite);
-
   const [springs, api] = useSpring(() => ({
     from: { display: "none" },
   }));
@@ -154,8 +152,8 @@ const BotCard = (props: any) => {
         titleTypographyProps={{
           fontSize: 20,
           textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
           fontWeight: "bold",
+          maxWidth: 130,
         }}
         color="#1D267D"
       />
