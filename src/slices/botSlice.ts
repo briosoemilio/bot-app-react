@@ -56,10 +56,16 @@ export const botSlice = createSlice({
       });
       state.value = newBots;
     },
+    deleteBot: (state, action) => {
+      const botId = action.payload;
+      const currentBots: Bot[] = state.value;
+      const newBots = currentBots.filter((bot: Bot) => bot.id !== botId);
+      state.value = newBots;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setAllBots, favoriteBot, editBot } = botSlice.actions;
+export const { setAllBots, favoriteBot, editBot, deleteBot } = botSlice.actions;
 
 export const botsReducer = botSlice.reducer;

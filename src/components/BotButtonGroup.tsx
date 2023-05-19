@@ -63,6 +63,7 @@ const BotButtonGroup = () => {
       <DeleteBotModal
         showModal={showDeleteBotModal}
         setShowModal={setShowDeleteBotModal}
+        bot={bot}
       />
       <PrimeBotModal
         showModal={showPrimeBotModal}
