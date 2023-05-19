@@ -10,12 +10,22 @@ const DeleteBotModal = (props: any) => {
   return (
     <Modal open={showModal} onClose={() => setShowModal(false)}>
       <Box sx={styles.modalStyle}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Delete Bot Modal
+        <Typography id="modal-modal-title" variant="h4" component="h2">
+          Are you sure you want to delete bot?
         </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-        </Typography>
+        <div className="d-flex justify-content-center mt-3">
+          <Button variant="contained" color="success" className="mx-3">
+            Yes
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            className="mx-3"
+            onClick={() => setShowModal(false)}
+          >
+            Cancel
+          </Button>
+        </div>
       </Box>
     </Modal>
   );

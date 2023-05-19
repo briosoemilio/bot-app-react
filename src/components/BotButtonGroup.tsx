@@ -4,8 +4,10 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import EditBotModal from "./modals/EditBotModal";
 import AddBotModal from "./modals/AddBotModal";
 import DeleteBotModal from "./modals/DeleteBotModal";
+import { mockBots } from "../mock/mockData";
 
 const BotButtonGroup = () => {
+  const bots = mockBots;
   const [showEditBotModal, setShowEditBotModal] = useState(false);
   const [showAddBotModal, setShowAddBotModal] = useState(false);
   const [showDeleteBotModal, setShowDeleteBotModal] = useState(false);
@@ -29,10 +31,12 @@ const BotButtonGroup = () => {
       <EditBotModal
         showModal={showEditBotModal}
         setShowModal={setShowEditBotModal}
+        bot={bots[0]}
       />
       <AddBotModal
         showModal={showAddBotModal}
         setShowModal={setShowAddBotModal}
+        bot={bots[0]}
       />
       <DeleteBotModal
         showModal={showDeleteBotModal}
