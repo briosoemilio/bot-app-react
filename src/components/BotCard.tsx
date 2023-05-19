@@ -22,6 +22,10 @@ import BatteryChargingFullIcon from "@mui/icons-material/BatteryChargingFull"; /
 
 // Helpers
 import { Images } from "../images";
+import { FavoriteBorderOutlined } from "@mui/icons-material";
+import { apiService } from "../services/Api.service";
+import { useDispatch } from "react-redux";
+import { favoriteBot } from "../slices/botSlice";
 
 const BotStatContainer = (props: any) => {
   const { statName, statValue, IconComponent } = props;
@@ -37,12 +41,7 @@ const BotStatContainer = (props: any) => {
 };
 
 const BotCard = (props: any) => {
-  const [expanded, setExpanded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
+  const dispatch = useDispatch();
   const { data } = props;
   const id = data?.id;
   const name = data?.name;
@@ -55,6 +54,8 @@ const BotCard = (props: any) => {
   const picture = data?.picture;
   const isRare = data?.isRare;
   const isFavorite = data?.isFavorite;
+
+  const [isFavoriteState, setIsFavoriteState] = useState(isFavorite);
 
   const [springs, api] = useSpring(() => ({
     from: { display: "none" },
@@ -73,6 +74,13 @@ const BotCard = (props: any) => {
       from: { display: "flex" },
       to: { display: "none" },
     });
+  };
+
+  const handleFavoriteClick = async () => {
+    dispatch(favoriteBot(id)); // set redux state to immediately render ui changes
+
+    // Call Update Bot API
+    await apiService.updateBot(id, { isFavorite: !isFavorite });
   };
 
   const RenderBotStats = () => {
@@ -134,8 +142,12 @@ const BotCard = (props: any) => {
       <CardHeader
         avatar={<Avatar sx={{ bgcolor: "#1D267D" }}>#{id}</Avatar>}
         action={
-          <IconButton aria-label="add to favorites" style={{ zIndex: 1 }}>
-            <FavoriteIcon />
+          <IconButton
+            aria-label="add to favorites"
+            style={{ zIndex: 1, color: "#1D267" }}
+            onClick={() => handleFavoriteClick()}
+          >
+            {isFavorite ? <FavoriteIcon /> : <FavoriteBorderOutlined />}
           </IconButton>
         }
         title={name}
