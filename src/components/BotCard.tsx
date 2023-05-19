@@ -20,6 +20,9 @@ import ShieldIcon from "@mui/icons-material/Shield"; // defense
 import PsychologyIcon from "@mui/icons-material/Psychology"; // intelligence
 import BatteryChargingFullIcon from "@mui/icons-material/BatteryChargingFull"; // energy
 
+// Helpers
+import { Images } from "../images";
+
 const BotStatContainer = (props: any) => {
   const { statName, statValue, IconComponent } = props;
   return (
@@ -41,19 +44,17 @@ const BotCard = (props: any) => {
   };
 
   const { data } = props;
-  const {
-    id,
-    name,
-    purpose,
-    attack,
-    defense,
-    health,
-    energy,
-    intelligence,
-    picture,
-    isRare,
-    isFavorite,
-  } = data;
+  const id = data?.id;
+  const name = data?.name;
+  const purpose = data?.purpose;
+  const attack = data?.attack;
+  const defense = data?.defense;
+  const health = data?.health;
+  const energy = data?.energy;
+  const intelligence = data?.intelligence;
+  const picture = data?.picture;
+  const isRare = data?.isRare;
+  const isFavorite = data?.isFavorite;
 
   const [springs, api] = useSpring(() => ({
     from: { display: "none" },
@@ -115,7 +116,10 @@ const BotCard = (props: any) => {
     );
   };
 
-  const pictureUrl = `data:image/svg+xml,${encodeURIComponent(picture)}`;
+  const pictureUrl =
+    id === 1
+      ? Images.optimusPrimeAvatar
+      : `data:image/svg+xml,${encodeURIComponent(picture)}`;
   return (
     <Card
       sx={{ width: "280px" }}
@@ -136,7 +140,7 @@ const BotCard = (props: any) => {
         }
         title={name}
         titleTypographyProps={{
-          fontSize: 25,
+          fontSize: 20,
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",
           fontWeight: "bold",
