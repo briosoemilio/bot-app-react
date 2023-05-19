@@ -11,7 +11,14 @@ const InputComponent = (props: any) => {
       startAdornment={`${label} : `}
       autoFocus={false}
       className="my-2"
-      onChange={(e) => setValue(e)}
+      onChange={(e) => {
+        if (type === "number") {
+          const parsedValue = parseInt(e.target.value);
+          setValue(parsedValue);
+        } else {
+          setValue(e.target.value);
+        }
+      }}
       style={{ flex: 1 }}
       type={type}
     />

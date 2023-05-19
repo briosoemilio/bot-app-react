@@ -6,11 +6,72 @@ import Modal from "@mui/material/Modal";
 import { styles } from "../../styles";
 import InputComponent from "../InputComponent";
 import SwitchComponent from "../SwitchComponent";
+import { apiService } from "../../services/Api.service";
+import { useDispatch } from "react-redux";
+import { setAllBots } from "../../slices/botSlice";
+import { setViewBot } from "../../slices/viewBotSlice";
 
 const AddBotModal = (props: any) => {
+  // Redux
+  const dispatch = useDispatch();
+
+  // React State
   const { showModal, setShowModal, bot } = props;
-  const { botName } = bot;
-  const [name, setName] = useState(botName);
+  const [name, setName] = useState("");
+  const [purpose, setPurpose] = useState("");
+  const [attack, setAttack] = useState(0);
+  const [defense, setDefense] = useState(0);
+  const [health, setHealth] = useState(0);
+  const [energy, setEnergy] = useState(0);
+  const [intelligence, setIntelligence] = useState(0);
+  const [isRare, setIsRare] = useState(false);
+
+  const payload = {
+    name,
+    purpose,
+    attack,
+    defense,
+    health,
+    energy,
+    intelligence,
+    isRare,
+  };
+
+  const resetState = () => {
+    setName("");
+    setPurpose("");
+    setAttack(0);
+    setDefense(0);
+    setHealth(0);
+    setEnergy(0);
+    setIntelligence(0);
+    setIsRare(false);
+  };
+
+  const addBot = async () => {
+    // Call create bot api
+    const createBotApiRes = await apiService.createBot(payload);
+    const newBot = createBotApiRes.data;
+
+    if (createBotApiRes.isSuccessful) {
+      // get new bot list from db and reset the redux state
+      const getBotApiRes = await apiService.getAllBots();
+      const newBotList: [] = getBotApiRes.data;
+      dispatch(setAllBots(newBotList));
+
+      // set view bot to newly created bot
+      const newBotIndex: number = newBotList.findIndex(
+        (bot: any) => bot.id === newBot.id
+      );
+      dispatch(setViewBot(newBotIndex));
+    } else {
+      console.log("add robot error occured");
+    }
+
+    setShowModal(false); // Close Modal
+    resetState(); // Reset state
+  };
+
   return (
     <Modal open={showModal} onClose={() => setShowModal(false)}>
       <Box sx={styles.modalStyle}>
@@ -24,42 +85,52 @@ const AddBotModal = (props: any) => {
           type={"text"}
         />
         <InputComponent
-          value={name}
-          setValue={setName}
+          value={purpose}
+          setValue={setPurpose}
           label={"Pupose"}
           type={"text"}
         />
         <InputComponent
-          value={name}
-          setValue={setName}
+          value={attack}
+          setValue={setAttack}
           label={"Attack"}
           type={"number"}
         />
         <InputComponent
-          value={name}
-          setValue={setName}
+          value={defense}
+          setValue={setDefense}
           label={"Defense"}
           type={"number"}
         />
         <InputComponent
-          value={name}
-          setValue={setName}
+          value={health}
+          setValue={setHealth}
           label={"Health"}
           type={"number"}
         />
         <InputComponent
-          value={name}
-          setValue={setName}
+          value={energy}
+          setValue={setEnergy}
           label={"Energy"}
           type={"number"}
         />
         <InputComponent
-          value={name}
-          setValue={setName}
+          value={intelligence}
+          setValue={setIntelligence}
           label={"Intelligence"}
           type={"number"}
         />
-        <SwitchComponent />
+        <SwitchComponent value={isRare} setValue={setIsRare} />
+        <div className="mt-3 d-flex justify-content-center">
+          <Button
+            variant="contained"
+            color="success"
+            className="mx-auto"
+            onClick={() => addBot()}
+          >
+            ADD
+          </Button>
+        </div>
       </Box>
     </Modal>
   );

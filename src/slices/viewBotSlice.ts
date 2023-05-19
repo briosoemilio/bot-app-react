@@ -11,9 +11,12 @@ export const viewBotSlice = createSlice({
     viewRight: (state) => {
       state.value += 1;
     },
+    setViewBot: (state, action) => {
+      state.value = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { viewLeft, viewRight } = viewBotSlice.actions;
+export const { viewLeft, viewRight, setViewBot } = viewBotSlice.actions;
 export const viewBotReducer = viewBotSlice.reducer;
