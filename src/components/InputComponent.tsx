@@ -3,7 +3,7 @@ import React from "react";
 import Input from "@mui/base/Input";
 
 const InputComponent = (props: any) => {
-  const { value, setValue, label, type } = props;
+  const { value, setValue, label, type, showError } = props;
   return (
     <Input
       value={value}
@@ -21,6 +21,8 @@ const InputComponent = (props: any) => {
       }}
       style={{ flex: 1 }}
       type={type}
+      error={showError}
+      endAdornment={showError ? " BOT EXISTS" : ""}
     />
   );
 };

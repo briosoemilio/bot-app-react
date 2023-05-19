@@ -9,7 +9,7 @@ import InputComponent from "../InputComponent";
 import SwitchComponent from "../SwitchComponent";
 
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAllBots } from "../../slices/botSlice";
 import { setViewBot } from "../../slices/viewBotSlice";
 
@@ -20,6 +20,7 @@ import { styles } from "../../styles";
 const AddBotModal = (props: any) => {
   // Redux
   const dispatch = useDispatch();
+  const bots = useSelector((state: any) => state.bots.value);
 
   // React State
   const { showModal, setShowModal, bot } = props;
@@ -31,6 +32,7 @@ const AddBotModal = (props: any) => {
   const [energy, setEnergy] = useState(0);
   const [intelligence, setIntelligence] = useState(0);
   const [isRare, setIsRare] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const payload = {
     name,
@@ -52,14 +54,22 @@ const AddBotModal = (props: any) => {
     setEnergy(0);
     setIntelligence(0);
     setIsRare(false);
+    setShowError(false);
   };
 
   const addBot = async () => {
+    // Check first bot name must be unique
+    const isExisting = bots.find((bot: any) => bot.name === name);
+    if (isExisting) {
+      setShowError(true); // show error prompt
+      return;
+    }
+
     // Call create bot api
     const createBotApiRes = await apiService.createBot(payload);
-    const newBot = createBotApiRes.data;
 
     if (createBotApiRes.isSuccessful) {
+      const newBot = createBotApiRes.data;
       // get new bot list from db and reset the redux state
       const getBotApiRes = await apiService.getAllBots();
       const newBotList: [] = getBotApiRes.data;
@@ -79,7 +89,13 @@ const AddBotModal = (props: any) => {
   };
 
   return (
-    <Modal open={showModal} onClose={() => setShowModal(false)}>
+    <Modal
+      open={showModal}
+      onClose={() => {
+        resetState();
+        setShowModal(false);
+      }}
+    >
       <Box sx={styles.modalStyle}>
         <Typography id="modal-modal-title" variant="h4" component="h2">
           Add Bot
@@ -89,6 +105,7 @@ const AddBotModal = (props: any) => {
           setValue={setName}
           label={"Name"}
           type={"text"}
+          showError={showError}
         />
         <InputComponent
           value={purpose}
