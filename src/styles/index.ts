@@ -92,4 +92,10 @@ export const styles = {
     }
     `
   ),
+
+  carouselButtonStyle: {
+    color: "#D4ADFC",
+    height: "50px",
+    width: "50px",
+  },
 };

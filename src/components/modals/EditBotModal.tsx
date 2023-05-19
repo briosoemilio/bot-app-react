@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
+// Components
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { styles } from "../../styles";
 import InputComponent from "../InputComponent";
 import SwitchComponent from "../SwitchComponent";
+
+// Redux
 import { useDispatch } from "react-redux";
-import { apiService } from "../../services/Api.service";
 import { editBot } from "../../slices/botSlice";
+
+// Utils
+import { styles } from "../../styles";
+import { apiService } from "../../services/Api.service";
 
 const EditBotModal = (props: any) => {
   const dispatch = useDispatch();

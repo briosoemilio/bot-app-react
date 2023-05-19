@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+// Components
 import Container from "react-bootstrap/Container";
 import BotAppNavbar from "./components/BotAppNavbar";
 import BotCardCarousel from "./components/BotCardCarousel";
-import { mockBots } from "./mock/mockData";
 import BotButtonGroup from "./components/BotButtonGroup";
-import { useDispatch, useSelector } from "react-redux";
+
+// React Redux
+import { useDispatch } from "react-redux";
 import { setAllBots } from "./slices/botSlice";
 import { apiService } from "./services/Api.service";
 
@@ -16,7 +19,7 @@ function App() {
   useEffect(() => {
     // get all bots and set to redux on first load
     apiService.getAllBots().then((res) => dispatch(setAllBots(res.data)));
-  }, []);
+  });
   return (
     <div className="App">
       <BotAppNavbar />

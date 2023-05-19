@@ -1,7 +1,11 @@
 import React from "react";
-import Switch, { switchClasses } from "@mui/base/Switch";
-import { styles } from "../styles";
+
+// Mui
+import Switch from "@mui/base/Switch";
 import { Typography } from "@mui/material";
+
+// Utils
+import { styles } from "../styles";
 
 const SwitchComponent = (props: any) => {
   const { value, setValue } = props;

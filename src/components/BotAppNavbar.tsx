@@ -1,8 +1,10 @@
 import React from "react";
-import { Button, Container } from "react-bootstrap";
-import Nav from "react-bootstrap/Nav";
+// Components
+import { Container } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import Image from "react-bootstrap/Image";
+
+// Utils
 import { Images } from "../images";
 
 const BotAppNavbar = () => {

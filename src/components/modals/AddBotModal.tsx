@@ -1,15 +1,21 @@
 import React, { useState } from "react";
+
+// Component
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { styles } from "../../styles";
 import InputComponent from "../InputComponent";
 import SwitchComponent from "../SwitchComponent";
-import { apiService } from "../../services/Api.service";
+
+// Redux
 import { useDispatch } from "react-redux";
 import { setAllBots } from "../../slices/botSlice";
 import { setViewBot } from "../../slices/viewBotSlice";
+
+// Utils
+import { apiService } from "../../services/Api.service";
+import { styles } from "../../styles";
 
 const AddBotModal = (props: any) => {
   // Redux

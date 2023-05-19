@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { apiService } from "../services/Api.service";
 
 interface Bot {
   id: number;

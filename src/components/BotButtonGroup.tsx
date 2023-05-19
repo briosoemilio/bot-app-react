@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+
+// Components
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import EditBotModal from "./modals/EditBotModal";
 import AddBotModal from "./modals/AddBotModal";
 import DeleteBotModal from "./modals/DeleteBotModal";
-import { useSelector } from "react-redux";
 import PrimeBotModal from "./modals/PrimeBotModal";
+
+// Redux
+import { useSelector } from "react-redux";
 
 const BotButtonGroup = () => {
   const [showEditBotModal, setShowEditBotModal] = useState(false);
