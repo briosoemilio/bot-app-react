@@ -40,10 +40,26 @@ export const botSlice = createSlice({
       });
       state.value = newBots;
     },
+    editBot: (state, action) => {
+      const botId = action.payload.botId;
+      const data = action.payload.data;
+      const currentBots: Bot[] = state.value;
+      const newBots = currentBots.map((bot: Bot) => {
+        if (bot.id === botId) {
+          return {
+            ...bot,
+            ...data,
+          };
+        } else {
+          return bot;
+        }
+      });
+      state.value = newBots;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setAllBots, favoriteBot } = botSlice.actions;
+export const { setAllBots, favoriteBot, editBot } = botSlice.actions;
 
 export const botsReducer = botSlice.reducer;
